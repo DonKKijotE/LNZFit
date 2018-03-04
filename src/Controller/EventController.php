@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Entity\User;
 use App\Entity\Sport;
+use App\Entity\Ticket;
 
 
 use App\Form\EventType;
@@ -103,10 +104,23 @@ class EventController extends Controller
 
         }
 
+        $tickets = $this->getDoctrine()
+           ->getRepository(Ticket::class)
+           ->findBy(
+                     ['event' => $event ]
+
+                   );
+
+           if (!$tickets) {
+             $tickets = NULL;
+
+
+          }
 
 
         return $this->render('event.html.twig', array(
-          'event' => $event
+          'event' => $event,
+          'tickets' => $tickets
 
         ));
 

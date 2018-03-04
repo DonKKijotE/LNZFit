@@ -20,8 +20,32 @@
         <p><br/>Event id: {{ event.id }} / Created by: {{ event.owner.username }} <br/><br/> Date: {{ event.date|date('d/m/Y H:i') }} / Place: {{ event.place.name }}  </p>
 
 
+        <h2>Event Tickets</h2>
+
+        {% if tickets is null %}
+            <p>No tickets for this match.</p>
+          {% else %}
+          <br/> {{ tickets|length }} tickets registered.<br/><br/>
+          {% for ticket in tickets %}
+              <li>Ticket #{{ ticket.id }} registered by {{ ticket.owner.username }}</li>
+          {% endfor %}
+        {% endif %}
+
+        {% if app.user %}
+         {% if event is not null %}
+         <br/>
+         <p><form action="{{ path('ticket_register', { 'id': event.id }) }}" method="post">
+               <input type="submit" value="Play Event!">
 
 
+         </form>
+        </p>
+
+         {% endif %}
+
+         {% else %}
+            <p><br/>You are not logged in. <a href="{{ path('login') }}">Login</a> or <a href="{{ path('user_registration') }}">Register</a></p>
+         {% endif %}
 
 
   {% endif %}

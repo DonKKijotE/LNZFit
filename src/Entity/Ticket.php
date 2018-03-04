@@ -49,6 +49,11 @@ class Ticket
          $this->setCreated(new \DateTime('now'));
        }
 
+       public function getId()
+       {
+           return $this->id;
+       }
+
        public function getOwner(): User
        {
            return $this->owner;
@@ -79,4 +84,8 @@ class Ticket
        {
            $this->created = $created;
        }
+
+
+
+
 }
