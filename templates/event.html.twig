@@ -29,6 +29,36 @@
           {% for ticket in tickets %}
               <li>Ticket #{{ ticket.id }} registered by {{ ticket.owner.username }}</li>
           {% endfor %}
+
+        <br/><br/>  For Debug Purposes:<br/><br/>
+
+          Max players: {{ event.sport.maxslots }} <br/>
+          Registered: {{ tickets|length }} <br/>
+          {% if tickets|length == event.sport.maxslots %}
+
+          All places booked. You can join the waiting list.
+
+          {% endif %}
+
+          {% if tickets|length < event.sport.maxslots %}
+
+          There are {{ event.sport.maxslots - tickets|length }} slots available. Register for the event!.
+
+          {% endif %}
+
+          {% if tickets|length > event.sport.maxslots %}
+
+          The event is full and there are people waiting. Join the waiting list, you might get lucky!.
+
+          {% endif %}
+
+
+
+
+
+
+
+
         {% endif %}
 
         {% if app.user %}
