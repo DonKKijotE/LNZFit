@@ -4,8 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Entity\Sport;
 use App\Entity\User;
+use App\Entity\Event;
+use App\Entity\Place;
+use App\Entity\Ticket;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
@@ -53,10 +58,24 @@ class Event
      */
      private $sport;
 
+     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="event")
+     */
+    private $tickets;
+
      public function __construct()
       {
         $this->setCreated(new \DateTime('now'));
+        $this->tickets = new ArrayCollection();
       }
+
+    /**
+     * @return Collection|Ticket[]
+     */
+     public function getTickets()
+     {
+          return $this->tickets;
+     }
 
     public function getOwner(): User
     {

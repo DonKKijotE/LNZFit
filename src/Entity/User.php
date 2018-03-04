@@ -79,6 +79,11 @@ class User implements UserInterface
           */
           private $events;
 
+          /**
+           * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="owner")
+           */
+           private $tickets;
+
         public function __construct()
         {
             $this->isActive = true;
@@ -86,8 +91,17 @@ class User implements UserInterface
             $this->setRoles($roles);
             $this->events = new ArrayCollection();
             $this->setCreated(new \DateTime('now'));
+            $this->tickets = new ArrayCollection();
 
         }
+
+        /**
+         * @return Collection|Ticket[]
+         */
+         public function getTickets()
+         {
+             return $this->tickets;
+         }
 
         /**
          * @return Collection|Event[]
