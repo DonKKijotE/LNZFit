@@ -22,7 +22,7 @@ class EventType extends AbstractType
         $builder
             // ->add('date', DateType::class)
             ->add('date', DateTimeType::class, array(
-                  'placeholder' => 'Select a value',
+                  'placeholder' => 'Select a value'
                  ))
             ->add('place', EntityType::class, array(
                   'class' => Place::class,
