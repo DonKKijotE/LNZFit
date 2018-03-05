@@ -1,0 +1,47 @@
+{# templates/place.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Lanzarote Fit > View Event {% endblock %}
+
+{% block body %}
+
+<!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-12">
+            <br/>
+            <h2>Place Information</h2>
+
+            {% if place is null %}
+                <p>No place with this id.</p>
+            {% else %}
+
+                <div class="card">
+                    <h5 class="card-header">{{ place.name }}</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Contact Information</h5>
+                        <p class="card-text">
+                            <span>Teléfono: XXXXXXXXXXXX</span><br>
+                            <span>E-mail: SSSSS@XXXXX.COM</span>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="pt-3">Place Location</h2>
+                    <div class="card">
+                        <h5 class="card-header">Map</h5>
+                        <div class="card-body embed-responsive embed-responsive-16by9">
+                            <ul class="card-text">
+                                {{ place.maplink|raw }}
+                            </ul>
+                        </div>
+                    </div>
+
+
+                {% endif %}
+
+
+
+        </div>
+    </div>
+{% endblock %}

@@ -31,6 +31,11 @@ class Place
        */
        private $created;
 
+       /**
+        * @ORM\Column(type="string", length=500)
+        */
+        private $maplink;
+
 
      /**
       * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="place")
@@ -86,6 +91,17 @@ class Place
           $this->created = $created;
       }
 
+      public function getMaplink()
+      {
+          return $this->maplink;
+      }
 
+
+      public function setMaplink($maplink)
+      {
+          $this->maplink = $maplink;
+
+          return $this;
+      }
 
 }
