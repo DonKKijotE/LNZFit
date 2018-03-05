@@ -14,37 +14,29 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class UserController extends Controller
 {
     /**
-     * @Route("/register", name="user_registration")
+     * @Route("/register", name="user_register")
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        // 1) build the form
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
-        // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-
-            return $this->redirectToRoute('user_registration');
+            return $this->redirectToRoute('user_register');
         }
 
-        return $this->render(
-            'register.html.twig',
-            array('form' => $form->createView())
-        );
+        return $this->render('register.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     /**
@@ -53,10 +45,8 @@ class UserController extends Controller
 
     public function login(Request $request, AuthenticationUtils $authUtils)
     {
-        // get the login error if there is one
         $error = $authUtils->getLastAuthenticationError();
 
-        // last username entered by the user
         $lastUsername = $authUtils->getLastUsername();
 
         return $this->render('login.html.twig', array(
@@ -68,14 +58,9 @@ class UserController extends Controller
     /**
      * @Route("/", name="home")
      */
-
-     public function view_home()
+     public function viewHome()
      {
-
-       return $this->render('home.html.twig');
-
-
+        return $this->redirectToRoute('view_events');
+        //return $this->render('home.html.twig');
      }
-
-
 }

@@ -5,23 +5,27 @@
 {% block title %} Lanzarote Fit > View Events {% endblock %}
 
 {% block body %}
-
-<div class="row">
-    <div class="col-lg-12">
-    <br/>
     <h2>View Events </h2>
-    <br/>
 
-    {% if events is null %}
-        <p>No events available.</p>
-        <a class="btn btn-primary" href="{{ path('create_event') }}">Create</a>
-    {% else %}
-        {% for event in events %}
-            <p> {{ event.sport.name }} @ {{ event.place.name }} @ {{ event.date|date('d/m/Y H:i') }} || <a href="{{ path('view_event', {'id': event.id}) }}"> View Event </a>  </p>
-        {% endfor %}
-    {% endif %}
-
+    <div class="row">
+        {% if events is null %}
+            <p>No events available.</p>
+            <a class="btn btn-primary" href="{{ path('create_event') }}">Create</a>
+        {% else %}
+            {% for event in events %}
+                <div class="col-lg-4">
+                    <div class="card">
+                        <h5 class="card-header">Evento de {{ event.sport.name }}</h5>
+                        <div class="card-body">
+                            <span>Lugar: {{ event.place.name }}</span><br>
+                            <span>Fecha y hora: <strong>{{ event.date|date('d/m/Y H:i') }}</strong></span>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" href="{{ path('view_event', {'id': event.id}) }}"> View Event </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
-</div>
-
 {% endblock %}

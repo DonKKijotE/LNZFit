@@ -6,83 +6,74 @@
 
 {% block body %}
 
-<div class="container marketing">
-
 <!-- Three columns of text below the carousel -->
-<div class="row">
-<div class="col-lg-12">
-  <br/>
-  <h2>Event Information</h2>
+    <div class="row">
+        <div class="col-lg-12">
+            <br/>
+            <h2>Event Information</h2>
 
-  {% if event is null %}
-      <p>No event with this id.</p>
-    {% else %}
-        <p><br/>Event id: {{ event.id }} / Created by: {{ event.owner.username }} <br/><br/> Date: {{ event.date|date('d/m/Y H:i') }} / Place: {{ event.place.name }}  </p>
+            {% if event is null %}
+                <p>No event with this id.</p>
+            {% else %}
 
+                <div class="card">
+                    <h5 class="card-header">Evento de {{ event.sport.name }}</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Creado por {{ event.owner.username }} - ID de evento: {{ event.id }}</h5>
+                        <p class="card-text">
+                            <span>Fecha y hora: {{ event.date|date('d/m/Y H:i') }}</span><br>
+                            <span>Lugar: {{ event.place.name }}</span>
+                        </p>
+                    </div>
+                </div>
 
-        <h2>Event Tickets</h2>
+                <h2 class="pt-3">Event Tickets</h2>
 
-        {% if tickets is null %}
-            <p>No tickets for this match.</p>
-          {% else %}
-          <br/> {{ tickets|length }} tickets registered.<br/><br/>
-          {% for ticket in tickets %}
-              <li>Ticket #{{ ticket.id }} registered by {{ ticket.owner.username }}</li>
-          {% endfor %}
+                {% if tickets is null %}
+                    <p>No tickets for this match.</p>
+                {% else %}
 
-        <br/><br/>  For Debug Purposes:<br/><br/>
+                    <div class="card">
+                        <h5 class="card-header">{{ tickets|length }} Tickets registered</h5>
+                        <div class="card-body">
+                            <ul class="card-text">
+                                {% for ticket in tickets %}
+                                    <li>Ticket #{{ ticket.id }} registered by {{ ticket.owner.username }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
 
-          Max players: {{ event.sport.maxslots }} <br/>
-          Registered: {{ tickets|length }} <br/>
-          {% if tickets|length == event.sport.maxslots %}
+                    <br/>For Debug Purposes:<br/>
 
-          All places booked. You can join the waiting list.
+                    Max players: {{ event.sport.maxslots }} <br/>
+                    Registered: {{ tickets|length }} <br/>
+                    {% if tickets|length == event.sport.maxslots %}
+                        All places booked. You can join the waiting list.
+                    {% endif %}
 
-          {% endif %}
+                    {% if tickets|length < event.sport.maxslots %}
+                        There are {{ event.sport.maxslots - tickets|length }} slots available. Register for the event!.
+                    {% endif %}
 
-          {% if tickets|length < event.sport.maxslots %}
+                    {% if tickets|length > event.sport.maxslots %}
+                        The event is full and there are people waiting. Join the waiting list, you might get lucky!.
+                    {% endif %}
 
-          There are {{ event.sport.maxslots - tickets|length }} slots available. Register for the event!.
+                {% endif %}
 
-          {% endif %}
-
-          {% if tickets|length > event.sport.maxslots %}
-
-          The event is full and there are people waiting. Join the waiting list, you might get lucky!.
-
-          {% endif %}
-
-
-
-
-
-
-
-
-        {% endif %}
-
-        {% if app.user %}
-         {% if event is not null %}
-         <br/>
-         <p><form action="{{ path('ticket_register', { 'id': event.id }) }}" method="post">
-               <input type="submit" value="Play Event!">
-
-
-         </form>
-        </p>
-
-         {% endif %}
-
-         {% else %}
-            <p><br/>You are not logged in. <a href="{{ path('login') }}">Login</a> or <a href="{{ path('user_registration') }}">Register</a></p>
-         {% endif %}
-
-
-  {% endif %}
-
-  <hr class="featurette-divider">
-
-</div><!-- /.col-lg-4 -->
-</div><!-- /.row -->
-
+                <div class="pt-3">
+                    {% if app.user %}
+                        {% if event is not null %}
+                            <form action="{{ path('ticket_register', { 'id': event.id }) }}" method="post">
+                                <input type="submit" class="btn btn-primary" value="Play Event!">
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <p><br/>You are not logged in. <a href="{{ path('login') }}">Login</a> or <a href="{{ path('user_register') }}">Register</a></p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
