@@ -20,19 +20,27 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('date', DateType::class)
+        // ->add('date', DateType::class)
             ->add('date', DateTimeType::class, array(
-                  'placeholder' => 'Select a value'
-                 ))
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'placeholder' => 'Select a value',
+                'placeholder' => 'yyyy-mm-dd',
+                'attr' => array(
+                    'data-date-end-date' => '0d'
+                ),
+                'html5' => false,
+                'required' => true
+            ))
             ->add('place', EntityType::class, array(
-                  'class' => Place::class,
-                  'choice_label' => 'name',
-                 ))
+                'class' => Place::class,
+                'choice_label' => 'name',
+            ))
             ->add('sport', EntityType::class, array(
-                  'class' => Sport::class,
-                  'choice_label' => 'name',
-                 ))
-          ;
+                'class' => Sport::class,
+                'choice_label' => 'name',
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

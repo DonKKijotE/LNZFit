@@ -19,21 +19,21 @@ class EventController extends Controller
 {
 
    /**
-    * @Route("/create", name="create_match")
+    * @Route("/event/create", name="create_event")
     */
    public function registerEvent(Request $request)
    {
 
-     $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-     // 1) build the form
-     $event = new Event();
-     $form = $this->createForm(EventType::class, $event);
+      // 1) build the form
+      $event = new Event();
+      $form = $this->createForm(EventType::class, $event);
 
 
-     // 2) handle the submit (will only happen on POST)
-     $form->handleRequest($request);
-     if ($form->isSubmitted() && $form->isValid()) {
+      // 2) handle the submit (will only happen on POST)
+      $form->handleRequest($request);
+      if ($form->isSubmitted() && $form->isValid()) {
 
         $event = $form->getData();
 
@@ -50,40 +50,32 @@ class EventController extends Controller
          // maybe set a "flash" success message for the user
 
          return $this->redirectToRoute('home');
-     }
+      }
 
-       return $this->render(
-           'create.html.twig',
-           array('form' => $form->createView())
-       );
+      return $this->render('create.html.twig',array(
+        'form' => $form->createView()
+      ));
    }
 
    /**
-      * @Route("/events", name="view_events")
+      * @Route("/event/all", name="view_events")
       */
 
      public function eventsView()
      {
+        $number = 10;
 
-       $number = 10;
+        $events = $this->getDoctrine()
+          ->getRepository(Event::class)
+          ->findLastEvents($number);
 
-       $events = $this->getDoctrine()
-            ->getRepository(Event::class)
-            ->findLastEvents($number);
+        if (!$events) {
+          $events = NULL;
+        }
 
-          if (!$events) {
-
-            $events = NULL;
-
-
-         }
-
-
-
-         return $this->render('events.html.twig', array(
-           'events' => $events
-
-         ));
+        return $this->render('events.html.twig', array(
+          'events' => $events
+        ));
 
      }
 

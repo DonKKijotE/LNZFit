@@ -1,42 +1,29 @@
-{# templates/security/login.html.twig #}
-{# ... you will probably extend your base template, like base.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %} Lanzarote Fit > User Login {% endblock %}
 
 {% block body %}
-<div class="container marketing">
+    <div class="row">
+        <div class="col-lg-12">
+        <br/>
+        <h2>User Login</h2>
 
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-<div class="row">
-<div class="col-lg-12">
-  <br/>
-<h2>User Login</h2>
+        <form action="{{ path('login') }}" method="post">
+            <label for="username">Username:</label>
+            <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
 
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
-<br/><br/>
-<form action="{{ path('login') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            <label for="password">Password:</label>
+            <input class="form-control" type="password" id="password" name="_password" />
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
+            <div class="pt-3">
+                <button class="btn btn-primary" type="submit">Login</button>
+            </div>
+        </form>
 
-    {#
-        If you want to control the URL the user
-        is redirected to on success (more details below)
-        <input type="hidden" name="_target_path" value="/account" />
-    #}
-
-    <button type="submit">login</button>
-</form>
-
-<hr class="featurette-divider">
-
-</div>
-</div><!-- /.row -->
-
+        </div>
+    </div>
 {% endblock %}
