@@ -24,11 +24,6 @@ class EventType extends AbstractType
             ->add('date', DateTimeType::class, array(
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
-                'placeholder' => 'Select a value',
-                'placeholder' => 'yyyy-mm-dd',
-                'attr' => array(
-                    'data-date-end-date' => '0d'
-                ),
                 'html5' => false,
                 'required' => true
             ))

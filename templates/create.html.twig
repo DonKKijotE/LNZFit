@@ -6,26 +6,25 @@
         <div class="col-lg-12">
             <br/>
             <h2>Create Event</h2>
-
-            <form action="{{ path('create_event') }}" method="post">
-                <div class="row">
-                    <div class="col-12 form-group my-sandbox">
+            <div class="row">
+                <form class="col-12" action="{{ path('create_event') }}" method="post">
+                    <div class="col-4 form-group my-sandbox">
                         {{ form_row(form.date.date, { attr: { 'class': 'form-control', 'placeholder': 'yyyy-mm-dd' } }) }}
                     </div>
-                    <div class="col-12 form-group">
-                        {{ form_row(form.date.time, { attr: { 'class': 'form-control', 'placeholder': 'HH:MM' } }) }}
+                    <div class="col-4 form-group timepicker">
+                        {{ form_row(form.date.time, { attr: { 'class': 'form-control', 'placeholder': 'yyyy-mm-dd', 'value': 'click', 'readonly': 'readonly' } }) }}
                     </div>
-                    <div class="col-12 form-group">
+                    <div class="col-6 form-group">
                         {{ form_row(form.place, { attr: { 'class': 'form-control', 'placeholder': 'Choose a place' } }) }}
                     </div>
-                    <div class="col-12 form-group">
+                    <div class="col-6 form-group">
                         {{ form_row(form.sport, { attr: { 'class': 'form-control', 'placeholder': 'Choose an sport' } }) }}
                     </div>
                     <div class="col-lg-2 pt-3">
                         <button class="btn btn-primary" type="submit">Create!</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}
