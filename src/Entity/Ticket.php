@@ -44,9 +44,17 @@ class Ticket
       */
       private $created;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+     private $state;
+
+
+
       public function __construct()
        {
          $this->setCreated(new \DateTime('now'));
+         $this->setState(true);
        }
 
        public function getId()
@@ -86,6 +94,15 @@ class Ticket
        }
 
 
+      public function getState()
+      {
+          return $this->state;
+      }
 
+
+      public function setState($state)
+      {
+          $this->state = $state;
+      }
 
 }

@@ -22,7 +22,7 @@
                         <h5 class="card-title">Creado por {{ event.owner.username }} - ID de evento: {{ event.id }}</h5>
                         <p class="card-text">
                             <span>Fecha y hora: {{ event.date|date('d/m/Y H:i') }}</span><br>
-                            <span>Lugar: {{ event.place.name }}</span>
+                            <span>Lugar: <a href="{{ path('view_place', {'id': event.place.id}) }}"> {{ event.place.name }} </a></span>
                         </p>
                     </div>
                 </div>
