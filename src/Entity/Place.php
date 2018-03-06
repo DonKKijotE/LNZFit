@@ -37,10 +37,17 @@ class Place
         private $maplink;
 
 
+
      /**
       * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="place")
       */
       private $events;
+
+      /**
+       * @ORM\Column(type="array", nullable=true)
+       */
+       private $admin = array();
+
 
       public function __construct()
        {
@@ -102,6 +109,18 @@ class Place
           $this->maplink = $maplink;
 
           return $this;
+      }
+
+      public function getAdmin()
+      {
+          return $this->admin;
+      }
+
+
+      public function setAdmin($admin)
+      {
+          $this->admin = $admin;
+
       }
 
 }

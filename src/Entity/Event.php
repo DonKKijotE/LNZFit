@@ -63,6 +63,8 @@ class Event
      */
     private $tickets;
 
+
+
      public function __construct()
       {
         $this->setCreated(new \DateTime('now'));
@@ -141,5 +143,9 @@ class Event
     {
         $this->created = $created;
     }
+
+
+
+    
 
 }
