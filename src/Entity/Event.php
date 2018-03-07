@@ -58,10 +58,20 @@ class Event
      */
      private $sport;
 
-     /**
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="event")
      */
-    private $tickets;
+     private $tickets;
+
+     /**
+      * @ORM\Column(type="boolean")
+      */
+      private $place_confirmed;
+
+      /**
+       * @ORM\Column(type="string", length=200)
+       */
+       private $comments;
 
 
 
@@ -69,6 +79,7 @@ class Event
       {
         $this->setCreated(new \DateTime('now'));
         $this->tickets = new ArrayCollection();
+        $this->place_confirmed = false;
       }
 
     /**
@@ -144,8 +155,29 @@ class Event
         $this->created = $created;
     }
 
+    public function getPlaceConfirmed()
+    {
+        return $this->place_confirmed;
+    }
+
+    public function setPlaceConfirmed($place_confirmed)
+    {
+        $this->place_confirmed = $place_confirmed;
+
+        return $this;
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
+    }
 
 
-    
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
 
 }

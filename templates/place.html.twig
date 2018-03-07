@@ -21,8 +21,18 @@
                     <div class="card-body">
                         <h5 class="card-title">Contact Information</h5>
                         <p class="card-text">
-                            <span>Teléfono: XXXXXXXXXXXX</span><br>
-                            <span>E-mail: SSSSS@XXXXX.COM</span>
+                          {% if place.telephone is not empty %}
+                              <span>Phone: {{ place.telephone }}.</span><br>
+                          {% endif %}
+                          {% if place.email is not empty %}
+                              <span>E-mail: {{ place.email }}.</span><br>
+                          {% endif %}
+                          {% if place.facebook is not empty %}
+                              <span>Facebook: <a href="{{ place.facebook }}" target="_blank"> Visit </a></span><br>
+                          {% endif %}
+                          {% if place.whatsapp is not empty %}
+                              <span>Whatsapp: <a href="https://api.whatsapp.com/api/send?phone={{place. whatsapp}}" target="_blank"> Open Conversation </a></span><br>
+                          {% endif %}
                         </p>
                     </div>
                 </div>

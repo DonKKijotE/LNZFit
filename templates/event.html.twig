@@ -19,10 +19,11 @@
                 <div class="card">
                     <h5 class="card-header">Evento de {{ event.sport.name }}</h5>
                     <div class="card-body">
-                        <h5 class="card-title">Creado por {{ event.owner.username }} - ID de evento: {{ event.id }}</h5>
+                        <h5 class="card-title">Creado por {{ event.owner.username }} - ID #{{ event.id }}</h5>
                         <p class="card-text">
-                            <span>Fecha y hora: {{ event.date|date('d/m/Y H:i') }}</span><br>
-                            <span>Lugar: <a href="{{ path('view_place', {'id': event.place.id}) }}"> {{ event.place.name }} </a></span>
+                            <span><strong>Fecha y hora:</strong> {{ event.date|date('d/m/Y H:i') }}</span><br>
+                            <span><strong>Lugar:</strong> <a href="{{ path('view_place', {'id': event.place.id}) }}"> {{ event.place.name }} </a><br></span>
+                            <span><strong>Comentarios:</strong><br> {{ event.comments }} </span>
                         </p>
                     </div>
                 </div>

@@ -40,6 +40,26 @@ class EventController extends Controller
          $em->persist($event);
          $em->flush();
 
+         /*
+
+         
+            Hay que añadir aquí una notificación al club
+            y/o al admin del club para que confirme la
+            reserva de la cancha.
+
+            Hay eventos donde no habrá que confirmar nada
+            porque pueden ser al aire libre:
+
+            ¿ Setear place_confirmed a TRUE para según
+            qué deportes?
+
+            Hablarlo con GuarrabasZ BitcH :)
+
+
+
+         */
+
+
          return $this->redirectToRoute('home');
       }
 

@@ -48,6 +48,26 @@ class Place
        */
        private $admin = array();
 
+       /**
+        * @ORM\Column(type="string", length=50)
+        */
+        private $telephone;
+
+        /**
+         * @ORM\Column(type="string", length=50)
+         */
+         private $email;
+
+         /**
+          * @ORM\Column(type="string", length=100)
+          */
+          private $facebook;
+
+          /**
+           * @ORM\Column(type="string", length=50)
+           */
+           private $whatsapp;
+
 
       public function __construct()
        {
@@ -122,5 +142,61 @@ class Place
           $this->admin = $admin;
 
       }
+
+
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+
+    public function getFacebook()
+    {
+        return $this->facebook;
+    }
+
+
+    public function setFacebook($facebook)
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+
+    public function getWhatsapp()
+    {
+        return $this->whatsapp;
+    }
+
+
+    public function setWhatsapp($whatsapp)
+    {
+        $this->whatsapp = $whatsapp;
+
+        return $this;
+    }
 
 }
