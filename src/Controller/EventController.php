@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EventController extends Controller
 {
-   /**
+  /**
    * @Route("/event/create", name="create_event")
    */
    public function registerEvent(Request $request)
@@ -42,7 +42,7 @@ class EventController extends Controller
 
          /*
 
-         
+
             Hay que añadir aquí una notificación al club
             y/o al admin del club para que confirme la
             reserva de la cancha.
@@ -88,7 +88,7 @@ class EventController extends Controller
          ));
       }
 
-      /**
+     /**
       * @Route("/event/{id}", name="view_event", requirements={"id"="\d+"})
       */
       public function eventView($id)
