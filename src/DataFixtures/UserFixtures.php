@@ -28,7 +28,7 @@ class UserFixtures extends Fixture
             $user->setEmail('javi_lanzarote@hotmail.com');
             $roles = array('ROLE_ADMIN');
             $user->setRoles($roles);
-            $password = $this->encoder->encodePassword($user, '12345');
+            $password = $this->encoder->encodePassword($user, '123456');
             $user->setPassword($password);
             $manager->persist($user);
             $manager->flush();
@@ -40,7 +40,7 @@ class UserFixtures extends Fixture
             $user->setEmail('barra@bas.com');
             $roles = array('ROLE_ADMIN');
             $user->setRoles($roles);
-            $password = $this->encoder->encodePassword($user, '12345');
+            $password = $this->encoder->encodePassword($user, '123456');
             $user->setPassword($password);
             $manager->persist($user);
             $manager->flush();
@@ -52,7 +52,7 @@ class UserFixtures extends Fixture
             $user->setEmail('crash@dummy.com');
             $roles = array('ROLE_USER');
             $user->setRoles($roles);
-            $password = $this->encoder->encodePassword($user, '12345');
+            $password = $this->encoder->encodePassword($user, '123456');
             $user->setPassword($password);
             $manager->persist($user);
             $manager->flush();
@@ -64,7 +64,7 @@ class UserFixtures extends Fixture
             $user->setEmail('chuck@norris.com');
             $roles = array('ROLE_USER');
             $user->setRoles($roles);
-            $password = $this->encoder->encodePassword($user, '12345');
+            $password = $this->encoder->encodePassword($user, '123456');
             $user->setPassword($password);
             $manager->persist($user);
             $manager->flush();

@@ -23,6 +23,7 @@
                         <p class="card-text">
                             <span><strong>Fecha y hora:</strong> {{ event.date|date('d/m/Y H:i') }}</span><br>
                             <span><strong>Lugar:</strong> <a href="{{ path('view_place', {'id': event.place.id}) }}"> {{ event.place.name }} </a><br></span>
+                            <span><strong>Creado por:</strong> {{ event.owner.name }} </span><br>
                             <span><strong>Comentarios:</strong><br> {{ event.comments }} </span>
                         </p>
                     </div>
