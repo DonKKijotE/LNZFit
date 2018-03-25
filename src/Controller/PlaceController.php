@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PlaceController extends Controller
 {
 
-      /**
+     /**
       * @Route("/place/{id}", name="view_place", requirements={"id"="\d+"})
       */
       public function placeView($id)
@@ -34,5 +34,20 @@ class PlaceController extends Controller
          return $this->render('place.html.twig', array(
             'place' => $place
          ));
+      }
+
+     /**
+      * @Route("/place/admin/{id}", name="admin_place", requirements={"id"="\d+"})
+      */
+      public function placeAdmin($id)
+      {
+         $place = $this->getDoctrine()
+            ->getRepository(Place::class)
+            ->find($id);
+
+         $this->denyAccessUnlessGranted('manage', $place);
+
+
+         return New Response('<h>You can manage bro!</h>');
       }
 }
